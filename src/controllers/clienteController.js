@@ -44,8 +44,17 @@ export const listarUsuarios = async (req, res) => {
     }
 };
 
-export const adicionarUsuarios = async () => {
-    
+export const adicionarUsuarios = async (req, res) => {
+    try{
+        const novoUsuario = await clienteService.create(req.body);
+        res.status(201).json({message: 'Cliente adicionado com sucesso', data: novoUsuario});
+    }catch (err) {
+        console.error('Erro ao adicionar cliente', err);
+        if (err.code === 'ER_DUP_Entry'){
+            return res.status(409).json({error: 'CPF já cadastrado.'})
+        }
+        res.status(500).json({Error: 'Erro ao adicionar cliente'});
+    }
 };
 
 export const atualizarUsuarios = async () => {
