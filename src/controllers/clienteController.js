@@ -43,4 +43,16 @@ export const listarUsuarios = async (req, res) => {
         res.ststus(500).json({error: 'Erro Interno do servidor'})
     }
 };
+
+export const adicionarUsuarios = async () => {
+    
+};
+
+export const atualizarUsuarios = async () => {
+
+};
+
+export const deletarUsuarios = async () => {
+
+};
 // try e catch são uma construção de tentar executar um conjunto de instruções e se der errado faça isso

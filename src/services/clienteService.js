@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 // Lembrando que db é uma variável que recebeu os poderes da biblioteca mysql2 que conecta o node a um banco de dados
 
 // exportar a função findAll pois clienteService é apenas um arquivo especializado que vai fornecer a especialidade dele para outros arquivos
-export const findAll = async (cpf, email, nome) => {
+export const findAll = async (cpf, nome, email) => {
     // 1. Define a consulta SQL base (listar todos os clientes)
     // Se ele não passar cpf email e nome vai mostrar todos
     let sql = 'SELECT * FROM usuario';
