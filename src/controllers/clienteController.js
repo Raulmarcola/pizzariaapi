@@ -57,11 +57,34 @@ export const adicionarUsuarios = async (req, res) => {
     }
 };
 
-export const atualizarUsuarios = async () => {
-
+export const atualizarUsuarios = async (req, res) => {
+    try {
+        const {cpf} = req.params;
+        const updated = await clienteService.update(cpf, req.body);
+        if (!updated){
+            return res.status(404).json({error: 'Cliente não encontrado'});
+        }
+        res.status(200).json({message: 'Cliente atualizado com sucesso'});
+    } catch (err) {
+        console.error('Erro ao atualizar cliente:', err);
+        res.status(500).json({error: 'Erro ao atualizar cliente'});
+    }
 };
 
-export const deletarUsuarios = async () => {
-
+export const deletarUsuarios = async (req, res) => {
+    try{
+        const {cpf} = req.params;
+        //definimos que cpf é um dado que virá na requisição, o admin vai informar o cpf do user a ser deletado
+        const deleted = await clienteService.remove(cpf);
+        // deleted será a função remove do arquivo clienteService a partir do cpf informado
+        if (!deleted){
+            return res.status(404).json({error: 'Cliente não encontrado'});
+            // Se deleted for diferente de todos os cpf existentes, erro ao informar o cpf
+        }
+        res.status(200).json({message: 'Cliente deletado com sucesso'});
+    } catch (err) {
+        console.error('Erro ao deletar cliente:', err);
+        res.status(500).json({error: 'Erro ao deletar cliente'});
+    }
 };
 // try e catch são uma construção de tentar executar um conjunto de instruções e se der errado faça isso
