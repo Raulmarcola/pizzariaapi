@@ -36,7 +36,7 @@ export const findAll = async (cpf, nome, email) => {
     };
     // Até aqui tudo virá com ?
     // sql = SELECT * FROM usuario + WHERE nome = ? AND email = ?
-    const [rows] = await db.query(sql, values); // query é uma função que pegará sql como o primeiro parâmetro e values como segundo. Ela troca tudo que é ? e troca pelo índice correspondente do vetor values
+    const [rows] = await db.query(sql, values); // query é uma função que pegará sql como o primeiro parâmetro e values como segundo. Ela troca tudo que é ? pelo índice correspondente do vetor values
     return rows; //Retorna um vetor que será o comando do MySQL
 }
 
@@ -57,7 +57,7 @@ export const create = async (usuarioData) => { //usuarioData é um objeto/coluna
 };
 
 export const update = async (cpf, usuarioData) => {
-    if (usuarioData.senha) { // Caso ele queira alterar a senha faz uma criptografia antes da alteração
+    if (usuarioData.senha) { // Caso ele queira alterar a senha, ou seja, 'senha' for um campo de usuarioData, faz uma criptografia antes da alteração
         const saltRounds = 10;
         usuarioData.senha = await bcrypt.hash(usuarioData.senha, saltRounds);
     }
