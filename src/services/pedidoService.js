@@ -1,5 +1,5 @@
+// pedidoService tem a especialidade de criar, consultar, atualizar e remover pedido do banco de dados
 import db from '../db/db.js';
-import bcrypt from 'bcrypt';
 
 export const findAll = async (idPedido, cpf, statusPedido) => {
     // define-se a variável sql como a consulta base de selecionar todos
@@ -18,13 +18,13 @@ export const findAll = async (idPedido, cpf, statusPedido) => {
 
     if(cpf){
         conditions.push('cpf = ?');
-        values.push(cpf);
+        values.push(cpf)
     }
 
     if(statusPedido){
         conditions.push('LOWER(statusPedido) LIKE ?');
         // Por ser um texto é usado Lower para padronizar e LIKE; 
-        values.push(`%${statusPedido.toLowerCase()}%`);
+        values.push(`%${statusPedido.toLowerCase()}%`)
         // toLowerCase para deixar minúsculo e as '%' são comandos SQL que indicam que pode haver mais caracteres
     }
 

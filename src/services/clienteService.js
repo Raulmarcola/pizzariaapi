@@ -1,4 +1,4 @@
-// clienteService tem a especialidade de criar, consultar, atualizar e remover clientee do banco de dados
+// clienteService tem a especialidade de criar, consultar, atualizar e remover cliente do banco de dados
 
 import db from '../db/db.js';
 import bcrypt from 'bcrypt';
