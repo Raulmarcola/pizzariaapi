@@ -18,3 +18,9 @@ export const pedidoUpdateSchema = Joi.object({
     statusPedido: Joi.string().max(20),
     formaEntrega: Joi.string().max(15)
 });
+
+export const listarPedido = async (req, res) =>{
+    try{
+        const {idPedido, statusPedido, cpf} = req.query;
+    }catch{}
+}
