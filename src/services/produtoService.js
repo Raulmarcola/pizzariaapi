@@ -44,12 +44,12 @@ export const create = async (produtoData) =>{
 };
 
 export const update = async (produtoData, idProduto) =>{
-    const [result] = await db.query('UPDATE produto SET ? WHERE idProduto = ?' [produtoData, idProduto]);
+    const [result] = await db.query('UPDATE produto SET ? WHERE idProduto = ?', [produtoData, idProduto]);
     return result.affectedRows > 0;
 };
 
 export const remove = async (idProduto) =>{
-    const [result] = await db.query('DELETE produto WHERE idProduto = ?' [idProduto]);
+    const [result] = await db.query('DELETE produto WHERE idProduto = ?', [idProduto]);
 
     return result.affectedRows > 0;
 };

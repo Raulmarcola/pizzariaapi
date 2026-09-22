@@ -16,6 +16,7 @@ export const usuarioCreateSchema = Joi.object({
     senha: Joi.string().required().max(100),
     tipo: Joi.string().required().max(10)
 });
+// Aqui se define o modelo de dados que serão recebidos 
 
 // colocar somente os dados passíveis de alteração
 export const usuarioUpdateSchema = Joi.object({
@@ -40,13 +41,15 @@ export const listarUsuarios = async (req, res) => {
         res.json(clientes);
     } catch (err) {
         console.error('Erro ao buscar clientes:', err);
-        res.ststus(500).json({error: 'Erro Interno do servidor'})
+        res.status(500).json({error: 'Erro Interno do servidor'})
     }
 };
 
 export const adicionarUsuarios = async (req, res) => {
     try{
         const novoUsuario = await clienteService.create(req.body);
+        // cada função de controller estará ligada a uma função de service
+        // adicionarUsuarios está ligado a create
         res.status(201).json({message: 'Cliente adicionado com sucesso', data: novoUsuario});
     }catch (err) {
         console.error('Erro ao adicionar cliente', err);
