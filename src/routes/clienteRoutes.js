@@ -26,7 +26,7 @@ router.post('/',validate(usuarioCreateSchema), clienteController.adicionarUsuari
 
 router.get('/', clienteController.listarUsuarios); //Rota final: GET /api/cliente
 
-router.put('/:cpf', validate(usuarioUpdateSchema), clienteController.atualizarUsuarios)
+router.put('/:cpf', validate(usuarioUpdateSchema), clienteController.atualizarUsuarios);
 
 router.delete('/:cpf', clienteController.deletarUsuarios);
 export default router;

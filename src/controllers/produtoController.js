@@ -42,7 +42,7 @@ export const adicionarProdutos = async (req, res) =>{
         // Ele enviará a resposta em dois formatos:
         // status que será 201 (sucesso)
         // e um json que mostra a mensagem 'Produto adicionado...' e os respectivos dados 'data': variável que recebe body
-    } catch{
+    } catch (err) {
         console.error('Erro ao adicionar produto', err);
         if(err.code === 'ER_DUP-Entry'){
             return res.status(409).json({error: 'Produto já registrado.'})
@@ -64,14 +64,14 @@ export const atualizarProdutos = async (req, res) =>{
         }
         res.status(200).json({message: 'Produto atualizado com sucesso.'});
         //200 - A pergunta faz sentido e eu sei a resposta
-    } catch{
+    } catch (err) {
         console.error('Erro ao atualizar produto:', err);
         res.status(500).json({error: 'Erro ao atualizar produto:'})
         //500 - Não sei a resposta
     }
 };
 
-export const deletarProduto = async (req, res) =>{
+export const deletarProdutos = async (req, res) =>{
     try{
         const {idProduto} = req.params
         //Definido idProduto como informado nos parâmetros. É necessário saber o Id para deletar um produto
@@ -84,7 +84,7 @@ export const deletarProduto = async (req, res) =>{
         }
         res.status(200).json({message: 'Produto deletado com sucesso'});
 
-    } catch{
+    } catch (err) {
         console.error('Erro ao deletar cliente', err);
         res.status(500).json({error: 'Erro ao deletar produto'})
     };

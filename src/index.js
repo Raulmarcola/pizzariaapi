@@ -13,9 +13,9 @@ import { fileURLToPath } from 'url';
 
 import clienteRoutes from './routes/clienteRoutes.js';
 
-// import produtoRoutes from './routes/produtoRoutes.js';
+import produtoRoutes from './routes/produtoRoutes.js';
 
-// import pedidoRoutes from './routes/pedidoRoutes.js';
+import pedidoRoutes from './routes/pedidoRoutes.js';
 
 // --- CONFIGURAÇÕES ---
 const __filename = fileURLToPath(import.meta.url);
@@ -63,11 +63,11 @@ const apiPrefix = '/api';
 app.use(`${apiPrefix}/clientes`, clienteRoutes);
 // // /api/clientes/
 // app.use(`${apiPrefix}/login`, authRoutes);
-// // /api/login/
-// app.use(`${apiPrefix}/produtos`, produtosRoutes);
-// // /api/produtos/
-// app.use(`${apiPrefix}/pedidos`, pedidosRoutes);
-// // /api/pedidos/ (exige token)
+// /api/login/
+app.use(`${apiPrefix}/produtos`, produtoRoutes);
+// /api/produtos/
+app.use(`${apiPrefix}/pedidos`, pedidoRoutes);
+// /api/pedidos/ (exige token)
 
 // --- TRATAMENTO DE ERROS ---
 //um middleware de erro centralizado.
