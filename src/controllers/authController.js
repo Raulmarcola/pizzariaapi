@@ -6,9 +6,11 @@ export const login = async (req, res) =>{
     const {cpf, senha} = req.body
     try{
         //1. Verificar se o usuário existe no banco de dados
-        const cliente = await clienteService.findAll(cpf);
+        const clientes = await clienteService.findAll(cpf);
         // Usa a função findAll que definimos em clienteService passando a variável cpf (que pegamos da requisição) como parâmetro. 
         // Assim, fará a busca no mysql.
+        const cliente = clientes[0]
+        //Fazendo isso para pegar apenas a primeira posição de clientes, ou seja, só o atributo cpf e não todos os campos
         if (!cliente) {
             return res.status(401).json({message: 'Credenciais Inválidas.'})
         }
