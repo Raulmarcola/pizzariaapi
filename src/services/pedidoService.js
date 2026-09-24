@@ -18,18 +18,18 @@ export const findAll = async (idPedido, cpf, statusPedido) => {
 
     if(cpf){
         conditions.push('cpf = ?');
-        values.push(cpf)
+        values.push(cpf);
     }
 
     if(statusPedido){
         conditions.push('LOWER(statusPedido) LIKE ?');
         // Por ser um texto é usado Lower para padronizar e LIKE; 
-        values.push(`%${statusPedido.toLowerCase()}%`)
+        values.push(`%${statusPedido.toLowerCase()}%`);
         // toLowerCase para deixar minúsculo e as '%' são comandos SQL que indicam que pode haver mais caracteres
     }
 
     if(conditions.length > 0){
-        sql += ' WHERE ' + conditions.join(' AND ')
+        sql += ' WHERE ' + conditions.join(' AND ');
         // Caso haja condições, some a consulta base com a jução das condições inseridas
         // WHERE e AND são comandos necessários para a sintaxe correta no MySQL
     }

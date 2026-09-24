@@ -26,7 +26,7 @@ export const findAll = async (idProduto, nomeProduto, tipo) =>{
     };
 
     if(conditions.length > 0){
-        sql += ' WHERE ' + conditions.join(' AND ')
+        sql += ' WHERE ' + conditions.join(' AND ');
         //AND deve ser colocado entre parênteses, pois se simplesmente somarmos ele será acrescentado no fim; Fazendo assim, se torna uma junção das condições (conditions.join) em função de AND, ou sej, ir juntando e colocando AND
     };
 
