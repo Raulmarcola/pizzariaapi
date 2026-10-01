@@ -6,6 +6,7 @@ import * as produtoController from '../controllers/produtoController.js';
 import validate from '../middlewares/validate.js';
 
 import { produtoCreateSchema, produtoUpdateSchema } from '../controllers/produtoController.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
@@ -16,6 +17,8 @@ router.post('/', validate(produtoCreateSchema), produtoController.adicionarProdu
 //adicionarProdutos, por sua vez, lá no arquivo produtoController, está ligado à função create do produtoService
 
 //Aleluia
+
+router.use(authMiddleware);
 
 router.get('/', produtoController.listarProdutos);
 //Método get está ligado a listagem de produtos (função listarProdutos).

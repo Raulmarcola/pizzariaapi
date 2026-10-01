@@ -5,11 +5,15 @@ import * as pedidoController from '../controllers/pedidoController.js';
 import validate from '../middlewares/validate.js';
 //Importando para validar os schemas
 import {pedidoCreateSchema, pedidoUpdateSchema} from '../controllers/pedidoController.js'
+import authMiddleware from '../middlewares/authMiddleware.js';
 //Importando os modelos de schema definidos em controller a partir do Banco de Dados
 const router = express.Router();
 //Pegando o elemento Router da npm biblioteca express e atribuindo-o a constante routes
 
 router.post('/', validate(pedidoCreateSchema), pedidoController.adicionarPedidos);
+
+router.use(authMiddleware)
+//A partir daqui é necessário se autenticar, para usar as rotas
 
 router.get('/', pedidoController.listarPedidos);
 

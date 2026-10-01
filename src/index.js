@@ -17,6 +17,8 @@ import produtoRoutes from './routes/produtoRoutes.js';
 
 import pedidoRoutes from './routes/pedidoRoutes.js';
 
+import entregadorRoutes from './routes/entregadorRoutes.js';
+
 // --- CONFIGURAÇÕES ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -45,6 +47,7 @@ app.use(express.json());
 
 //Servindo pasta 'public' para arquivos (CSS, JS, imagens).
 app.use(express.static(path.join(__dirname, '..', 'public')));
+//
 
 // .. serve para voltar para o diretório anterior, assim o index terá acesso a public
 
@@ -52,6 +55,9 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // rota principal que serve a página HTML
 app.get('/', (req,res)=>{
     res.sendFile(path.join(__dirname, '..', 'pages', 'home.html'))
+    //Isso daqui é mandar para o usuário a página html, a estruturação visual, interface
+    //As outras páginas são alcançadas por outras rotas:
+    //Assim como as funções de mexer em uma tabela específica tem uma rota, cada página também terá uma rota definida aqui
 })
 // join é junção. Ele juntará todo o conteúdo anterior de forma adaptada (__dirname), diretório anterior (..), pasta pages (pages) e o arquivo home.html na URL
 
@@ -65,9 +71,11 @@ app.use(`${apiPrefix}/clientes`, clienteRoutes);
 // app.use(`${apiPrefix}/login`, authRoutes);
 // /api/login/
 app.use(`${apiPrefix}/produtos`, produtoRoutes);
-// /api/produtos/
+// /api/produtos/  
 app.use(`${apiPrefix}/pedidos`, pedidoRoutes);
-// /api/pedidos/ (exige token)
+// /api/pedidos/ 
+app.use(`${apiPrefix}/entregadores`, entregadorRoutes);
+// /api/entregadores/
 
 // --- TRATAMENTO DE ERROS ---
 //um middleware de erro centralizado.

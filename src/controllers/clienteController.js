@@ -56,7 +56,7 @@ export const adicionarUsuarios = async (req, res) => {
         if (err.code === 'ER_DUP_Entry'){
             return res.status(409).json({error: 'CPF já cadastrado.'})
         }
-        res.status(500).json({Error: 'Erro ao adicionar cliente'});
+        res.status(500).json({error: 'Erro ao adicionar cliente'});
     }
 };
 
