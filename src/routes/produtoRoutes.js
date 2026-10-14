@@ -12,13 +12,14 @@ const router = express.Router();
 
 //Através do router, faremos as rotas de cada método http que pode ser usado. Cada Método HTTP está ligado a uma função de controller e cada função de controller está ligada a uma função de service. Da seguinte maneira:
 
+router.use(authMiddleware);
+//Na tabela Produto todas as rotas exigem autenticação, pois opera em coisas internas
+
 router.post('/', validate(produtoCreateSchema), produtoController.adicionarProdutos)
 //Método post está ligado a adicionarProdutoS, pois essa é a função dele postar = adicionar.
 //adicionarProdutos, por sua vez, lá no arquivo produtoController, está ligado à função create do produtoService
 
 //Aleluia
-
-router.use(authMiddleware);
 
 router.get('/', produtoController.listarProdutos);
 //Método get está ligado a listagem de produtos (função listarProdutos).

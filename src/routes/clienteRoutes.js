@@ -20,10 +20,12 @@ router.post('/',validate(usuarioCreateSchema), clienteController.adicionarUsuari
 
 // 2. Aplica a proteção do login em todas as rotas abaixo desta linha, porque a partir daqui é só se o usuário estiver logado
 router.use(authMiddleware);
+//A execução não é assíncrona (async); é um algoritmo normal, ou seja, a partir daqui usaremos o middleware de autorização
+//O efeito disso é que, sem autorização, o usuário pode criar usuário.
+//Já para listar, atualizar e deletar é necessária autorização
+
 
 // O caminho base '/api/clientes' já foi definido no index.js
-
-
 router.get('/', clienteController.listarUsuarios); //Rota final: GET /api/cliente
 
 router.put('/:cpf', validate(usuarioUpdateSchema), clienteController.atualizarUsuarios);

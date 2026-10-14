@@ -10,10 +10,10 @@ import authMiddleware from '../middlewares/authMiddleware.js';
 const router = express.Router();
 //Pegando o elemento Router da npm biblioteca express e atribuindo-o a constante routes
 
-router.post('/', validate(pedidoCreateSchema), pedidoController.adicionarPedidos);
-
 router.use(authMiddleware)
-//A partir daqui é necessário se autenticar, para usar as rotas
+//No pedido todas as rotas exigem autorização, pois só quem é de dentro pode operar sobre isso
+
+router.post('/', validate(pedidoCreateSchema), pedidoController.adicionarPedidos);
 
 router.get('/', pedidoController.listarPedidos);
 

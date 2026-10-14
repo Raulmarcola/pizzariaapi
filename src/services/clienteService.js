@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 // Lembrando que db é uma variável que recebeu os poderes da biblioteca mysql2 que conecta o node a um banco de dados
 
 // exportar a função findAll pois clienteService é apenas um arquivo especializado que vai fornecer a especialidade dele para outros arquivos
-export const findAll = async (cpf, nome, email) => {
+export const findAll = async (cpf, nome, email, cidade) => {
     // 1. Define a consulta SQL base (listar todos os clientes)
     // Se ele não passar cpf email e nome vai mostrar todos
     let sql = 'SELECT * FROM usuario';
@@ -28,6 +28,11 @@ export const findAll = async (cpf, nome, email) => {
     if (email){
         conditions.push('email = ?');
         values.push(email);
+    }
+
+    if (cidade){
+        conditions.push('LOWER(cidade) LIKE ?');
+        values.push(`%${cidade.toLowerCase()}%`)
     }
 
     // 5. Se houver condições, anexa elas à consulta SQL
@@ -67,6 +72,7 @@ export const update = async (cpf, usuarioData) => {
 };
 
 export const remove = async (cpf) => {
-    const [result] = await db.query('DELETE FROM cliente WHERE cpf = ?', [cpf]); //Maior proteção de dados ao mandar o conteúdo (cpf) separado da string
+    const [result] = await db.query('DELETE FROM usuario WHERE cpf = ?', [cpf]); //Maior proteção de dados ao mandar o conteúdo (cpf) separado da string
+    //Havia um erro nesta parte: tinha colocado 'FROM cliente', sendo que a tabela no banco de dados é 'usuario'. Assim, a mensagem de erro que o mySQL mandava era 'tabela não existe'
     return result.affectedRows > 0;
 };

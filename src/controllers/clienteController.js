@@ -34,9 +34,9 @@ export const listarUsuarios = async (req, res) => {
     try{
         //Capturamos os parâmetros de consulta URL
         //exemplo: ?cpf=01234567890 / ?nome=sandro / ?email=sandro@senac.br
-        const { cpf, nome, email } = req.query;
+        const { cpf, nome, email, cidade } = req.query;
         //Passamos todos os filtros para o serviço
-        const clientes = await clienteService.findAll(cpf, nome, email);
+        const clientes = await clienteService.findAll(cpf, nome, email, cidade);
         //Lista vazia é uma resposta válida: 200 com []
         res.json(clientes);
     } catch (err) {
@@ -62,8 +62,8 @@ export const adicionarUsuarios = async (req, res) => {
 
 export const atualizarUsuarios = async (req, res) => {
     try {
-        const {cpf} = req.params;
-        const updated = await clienteService.update(cpf, req.body);
+        const {cpf} = req.params; //cpf virá da url, para IDentificar qual cliente atualizar
+        const updated = await clienteService.update(cpf, req.body); //então usaremos a função update do clienteService a partir do cpf que pegamos acima e do corpo dda requisição que será um json com os dados atualizados
         if (!updated){
             return res.status(404).json({error: 'Cliente não encontrado'});
         }
@@ -77,7 +77,7 @@ export const atualizarUsuarios = async (req, res) => {
 export const deletarUsuarios = async (req, res) => {
     try{
         const {cpf} = req.params;
-        //definimos que cpf é um dado que virá na requisição, o admin vai informar o cpf do user a ser deletado
+        //definimos que cpf é um dado que virá na url da requisição, o admin vai informar o cpf do user a ser deletado
         const deleted = await clienteService.remove(cpf);
         // deleted será a função remove do arquivo clienteService a partir do cpf informado
         if (!deleted){

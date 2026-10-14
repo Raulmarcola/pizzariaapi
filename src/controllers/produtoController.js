@@ -1,4 +1,4 @@
-import * as produtoService from '../services/pedidoService.js';
+import * as produtoService from '../services/produtoService.js';
 import Joi from 'joi';
 
 export const produtoCreateSchema = Joi.object({
@@ -36,7 +36,7 @@ export const listarProdutos = async (req, res) =>{
 export const adicionarProdutos = async (req, res) =>{
     try{
         const novoProduto = await produtoService.create(req.body);
-        // AdicionarProdutos é uma função que recebe como parâmetro requisição da url. 
+        // AdicionarProdutos é uma função que recebe como parâmetro o corpo da requisição. 
         // Criamos uma variável novoProduto que aciona o create a partir de req.body que seria um json com os dados do novo cliente
         res.status(201).json({message: 'Produto adicionado com sucesso.', data: novoProduto});
         // Ele enviará a resposta em dois formatos:

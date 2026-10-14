@@ -14,9 +14,9 @@ const authMiddleware = async (req, res, next) =>{
 
     const parts = authHeader.split(' '); //split é uma função que recebe como parâmetro, neste caso, o espaço; ela separará a variável em partes onde houver este parâmetro.
     //Assim, parts será um vetor em que cada índice é uma parte de authHeader
-    if (parts.lenght !== 2) {
+    if (parts.length !== 2) {
         //O tamanho do vetor ser diferente de dois, significa que algo deu errado, pois era para ter o bearer e o TOKEN, exatamente duas partes
-        return res.status(401).json({message: 'Token em formato inválido.'})
+        return res.status(401).json({message: 'Token em formato inválido.'});
     }
 
     const [scheme, token] = parts;

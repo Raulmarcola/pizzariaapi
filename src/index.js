@@ -1,3 +1,5 @@
+//O Index é o que tem contato direto com o front-end 
+
 import 'dotenv/config';
 import express from 'express';
 import helmet from 'helmet';
@@ -9,7 +11,7 @@ import { fileURLToPath } from 'url';
 
 //Importando Rotas
 //Rotas de identiificação
-// import authRoutes from './routes/authRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 import clienteRoutes from './routes/clienteRoutes.js';
 
@@ -56,7 +58,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.get('/', (req,res)=>{
     res.sendFile(path.join(__dirname, '..', 'pages', 'home.html'))
     //Isso daqui é mandar para o usuário a página html, a estruturação visual, interface
-    //As outras páginas são alcançadas por outras rotas:
+    //As outras páginas serão alcançadas por outras rotas:
     //Assim como as funções de mexer em uma tabela específica tem uma rota, cada página também terá uma rota definida aqui
 })
 // join é junção. Ele juntará todo o conteúdo anterior de forma adaptada (__dirname), diretório anterior (..), pasta pages (pages) e o arquivo home.html na URL
@@ -65,10 +67,10 @@ app.get('/', (req,res)=>{
 
 const apiPrefix = '/api';
 // //Rotas gerais da API (ex: /api/sandro)
-// // Atrelando rota URL ao arquivo, à funcionalidade
+// // Atrelando rota URL ao arquivo, à funcionalidade do routes
 app.use(`${apiPrefix}/clientes`, clienteRoutes);
 // // /api/clientes/
-// app.use(`${apiPrefix}/login`, authRoutes);
+app.use(`${apiPrefix}/login`, authRoutes);
 // /api/login/
 app.use(`${apiPrefix}/produtos`, produtoRoutes);
 // /api/produtos/  

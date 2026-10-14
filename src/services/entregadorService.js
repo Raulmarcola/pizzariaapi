@@ -1,7 +1,7 @@
 //Iniciando a integração com a tabela entregador pelo Service pois é o último na ordem da API, depois controller e depois routes
-//Pois routes usa funções de controller, controller usa funções de service e service usa o db. Logo, devemos começar pelo Service que é o único que não usa recursos dos outros, independente
+//Pois routes usa funções de controller, controller usa funções de service e service usa o db. Logo, devemos começar pelo Service que é o único que não usa recursos dos outros, independente deles , usa recursos da api
 
-import db from "../db/db";
+import db from "../db/db.js";
 //Importando a variável db que tem os poderes da biblioteca mysql, pois o service é o arquivo que tem contato direto com o Banco de Dados, última parte da API, termina a interação entre cliente e database
 
 export const findAll = async (idEntregador, nomeEntregador, telefone) =>{

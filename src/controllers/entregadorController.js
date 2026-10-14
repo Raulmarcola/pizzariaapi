@@ -55,7 +55,7 @@ export const adicionarEntregadores = async (req, res) =>{
 export const atualizarEntregadores = async (req, res) =>{
     try {
         const {idEntregador} = req.params;
-        //Definimos que idEntregador é um parâmetro vindo do enpoint da URL
+        //Definimos que idEntregador é um parâmetro vindo do endpoint da URL
 
         //A partir dessa constante idEntregador usamos a função update definida no service
         const updated = await entregadorController.update(idEntregador, req.body);
